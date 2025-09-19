@@ -19,15 +19,9 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'package-lock.json'
 
     - name: Install dependencies
-      run: |
-        if [ -f package-lock.json ]; then
-          npm ci
-        else
-          npm install
-        fi
+      run: npm install
 
     - name: Run linter
       run: npm run lint
