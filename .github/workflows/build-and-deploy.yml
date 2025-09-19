@@ -27,18 +27,9 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'package-lock.json'
 
     - name: Install dependencies
-      run: |
-        npm install
-        if [ -f package-lock.json ]; then
-          npm ci
-        else
-          npm install
-          
-
-        fi
+      run: npm install
 
     - name: Run tests
       run: npm test
@@ -73,7 +64,7 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-to: type=gha
 
     - name: Deploy to remote host
       if: github.event_name == 'pull_request'
