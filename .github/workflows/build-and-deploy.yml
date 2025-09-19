@@ -31,10 +31,13 @@ jobs:
 
     - name: Install dependencies
       run: |
+        npm init @eslint/config
         if [ -f package-lock.json ]; then
           npm ci
         else
           npm install
+          
+
         fi
 
     - name: Run tests
