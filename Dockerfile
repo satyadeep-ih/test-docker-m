@@ -27,14 +27,15 @@ ENV NODE_ENV production
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN adduser --system --uid 1001 nodejs
 
 # Copy the built application
-COPY --from=builder --chown=nextjs:nodejs /app/server.js ./
-COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
-COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs /app/server.js ./
+COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
+COPY --from=builder --chown=nodejs:nodejs /app/package-lock.json ./
+COPY --from=deps --chown=nodejs:nodejs /app/node_modules ./node_modules
 
-USER nextjs
+USER nodejs
 
 EXPOSE 3000
 
